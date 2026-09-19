@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DojoTrack — Karate Dojo Register</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="logo">
+            <div class="enso">◯</div>
+            <div>
+                <h1>DOJOTRACK</h1>
+                <small>Karate Dojo Register</small>
+            </div>
+        </div>
+
+        <div class="dojo-line"></div>
+
+        <nav>
+            <button class="nav active" data-page="home">🥋 Home</button>
+            <button class="nav" data-page="students">👥 Students</button>
+            <button class="nav" data-page="admission">＋ New Admission</button>
+            <button class="nav" data-page="attendance">📜 Attendance</button>
+            <button class="nav" data-page="fees">💴 Fees</button>
+            <button class="nav" data-page="reports">🏅 Reports</button>
+            <button class="nav" data-page="settings">⚙ Settings</button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <span class="red-dot"></span>
+            Local Register
+        </div>
+
+    </aside>
+
+
+    <main>
+
+        <header class="topbar">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+            <div>
+                <h2 id="pageTitle">Dojo</h2>
+                <p id="pageSubtitle">Karate student register</p>
+            </div>
+
+            <div class="date-box" id="headerDate"></div>
+        </header>
+
+
+        <!-- HOME -->
+
+        <section class="page active" id="home">
+
+            <div class="hero">
+
+                <div class="hero-symbol">🥋</div>
+
+                <div>
+                    <div class="japanese">道場</div>
+                    <h1>Welcome to the Dojo</h1>
+                    <p>Your digital karate register.</p>
+                </div>
+
+            </div>
+
+
+            <div class="stats">
+
+                <div class="stat">
+                    <span class="stat-icon">👥</span>
+                    <div>
+                        <small>Students</small>
+                        <strong id="statStudents">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-icon">🥋</span>
+                    <div>
+                        <small>Present Today</small>
+                        <strong id="statPresent">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-icon">○</span>
+                    <div>
+                        <small>Absent Today</small>
+                        <strong id="statAbsent">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat">
+                    <span class="stat-icon">₹</span>
+                    <div>
+                        <small>Pending Fees</small>
+                        <strong id="statPending">₹0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="home-grid">
+
+                <div class="panel">
+
+                    <div class="panel-head">
+                        <div>
+                            <span class="eyebrow">TODAY'S TRAINING</span>
+                            <h3 id="homeDate"></h3>
+                        </div>
+
+                        <span id="homeClassBadge" class="badge"></span>
+                    </div>
+
+                    <div id="homeClass"></div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-head">
+                        <div>
+                            <span class="eyebrow">DOJO ACTIONS</span>
+                            <h3>Quick Actions</h3>
+                        </div>
+                    </div>
+
+                    <div class="quick-grid">
+                        <button onclick="showPage('attendance')">🥋 Mark Attendance</button>
+                        <button onclick="showPage('admission')">＋ New Admission</button>
+                        <button onclick="showPage('fees')">₹ Manage Fees</button>
+                        <button onclick="showPage('students')">👥 Students</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDENTS -->
+
+        <section class="page" id="students">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="eyebrow">DOJO MEMBERS</span>
+                    <h2>Students</h2>
+                    <p>All active students in your dojo.</p>
+                </div>
+
+                <button class="red-btn" onclick="showPage('admission')">
+                    ＋ New Admission
+                </button>
+
+            </div>
+
+
+            <div class="search">
+                🔍
+                <input
+                    id="searchStudent"
+                    type="text"
+                    placeholder="Search student..."
+                    oninput="renderStudents()">
+            </div>
+
+
+            <div id="studentsList"></div>
+
+        </section>
+
+
+        <!-- ADMISSION -->
+
+        <section class="page" id="admission">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="eyebrow">NEW MEMBER</span>
+                    <h2>New Admission</h2>
+                    <p>Enter the student's basic details.</p>
+                </div>
+
+            </div>
+
+
+            <form class="form-card" id="admissionForm">
+
+                <div class="karate-stamp">入門</div>
+
+                <div class="form-group">
+                    <label>Student Name *</label>
+                    <input id="admissionName" required placeholder="Enter student name">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number <span>optional</span></label>
+                    <input id="admissionPhone" type="tel" placeholder="Phone number">
+                </div>
+
+
+                <div class="two-col">
+
+                    <div class="form-group">
+                        <label>Current Belt</label>
+
+                        <select id="admissionBelt">
+                            <option>White</option>
+                            <option>Yellow</option>
+                            <option>Orange</option>
+                            <option>Green</option>
+                            <option>Blue</option>
+                            <option>Purple</option>
+                            <option>Brown</option>
+                            <option>Black</option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Current Grade</label>
+                        <input id="admissionGrade" placeholder="e.g. Beginner / 5th Kyu">
+                    </div>
+
+                </div>
+
+
+                <div class="fee-preview">
+
+                    <div>
+                        <span>Admission Fee</span>
+                        <strong>₹800</strong>
+                    </div>
+
+                    <div>
+                        <span>Uniform Fee</span>
+                        <strong>₹800</strong>
+                    </div>
+
+                    <div>
+                        <span>Monthly Fee</span>
+                        <strong>₹500</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="form-note">
+                    Initial fee total: <strong>₹2,100</strong>
+                    <br>
+                    Admission and uniform are one-time fees.
+                </div>
+
+
+                <button class="red-btn full" type="submit">
+                    🥋 Add Student to Dojo
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- ATTENDANCE -->
+
+        <section class="page" id="attendance">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="eyebrow">TRAINING REGISTER</span>
+                    <h2>Attendance</h2>
+                    <p>Mark attendance for today's training.</p>
+                </div>
+
+                <input
+                    class="date-input"
+                    id="attendanceDate"
+                    type="date"
+                    onchange="renderAttendance()">
+
+            </div>
+
+
+            <div id="classControl"></div>
+
+
+            <div class="attendance-summary">
+
+                <div>
+                    <span>Present</span>
+                    <strong id="attPresent">0</strong>
+                </div>
+
+                <div>
+                    <span>Absent</span>
+                    <strong id="attAbsent">0</strong>
+                </div>
+
+                <div>
+                    <span>Not Marked</span>
+                    <strong id="attUnmarked">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="attendance-actions">
+                <button class="red-btn" onclick="markAllPresent()">✓ All Present</button>
+                <button class="dark-btn" onclick="clearAttendance()">↺ Clear</button>
+            </div>
+
+
+            <div id="attendanceList"></div>
+
+        </section>
+
+
+        <!-- FEES -->
+
+        <section class="page" id="fees">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="eyebrow">PAYMENT REGISTER</span>
+                    <h2>Fees</h2>
+                    <p>Track monthly and one-time payments.</p>
+                </div>
+
+                <input
+                    class="date-input"
+                    id="feeMonth"
+                    type="month"
+                    onchange="renderFees()">
+
+            </div>
+
+
+            <div class="fee-legend">
+
+                <span>Monthly: <strong>₹500</strong></span>
+                <span>Uniform: <strong>₹800</strong></span>
+                <span>Admission: <strong>₹800</strong></span>
+
+            </div>
+
+
+            <div id="feesList"></div>
+
+        </section>
+
+
+        <!-- REPORTS -->
+
+        <section class="page" id="reports">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="eyebrow">DOJO RECORDS</span>
+                    <h2>Reports</h2>
+                    <p>Attendance and belt eligibility.</p>
+                </div>
+
+                <input
+                    class="date-input"
+                    id="reportMonth"
+                    type="month"
+                    onchange="renderReports()">
+
+            </div>
+
+
+            <div class="rule-card">
+
+                <div class="rule-icon">75%</div>
+
+                <div>
+                    <strong>Belt Upgrade Attendance Rule</strong>
+                    <p>
+                        Minimum 75% attendance is required for belt upgrade eligibility.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div id="reportsList"></div>
+
+        </section>
+
+
+        <!-- SETTINGS -->
+
+        <section class="page" id="settings">
+
+            <div class="section-top">
+
+                <div>
+                    <span class="eyebrow">DOJO SETTINGS</span>
+                    <h2>Settings & Backup</h2>
+                    <p>Protect and manage your register data.</p>
+                </div>
+
+            </div>
+
+
+            <div class="settings-grid">
+
+                <div class="panel">
+
+                    <h3>🥋 Dojo Rules</h3>
+
+                    <div class="setting-row">
+                        <span>Regular Classes</span>
+                        <strong>Saturday & Sunday</strong>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Belt Eligibility</span>
+                        <strong>75%</strong>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Monthly Fee</span>
+                        <strong>₹500</strong>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Uniform Fee</span>
+                        <strong>₹800</strong>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Admission Fee</span>
+                        <strong>₹800</strong>
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <h3>💾 Data Backup</h3>
+
+                    <p class="setting-description">
+                        Export a backup file regularly so your register can be restored if needed.
+                    </p>
+
+                    <div class="settings-buttons">
+                        <button class="red-btn" onclick="exportBackup()">
+                            ↓ Export Backup
+                        </button>
+
+                        <label class="dark-btn file-btn">
+                            ↑ Import Backup
+                            <input
+                                type="file"
+                                accept=".json"
+                                onchange="importBackup(event)">
+                        </label>
+                    </div>
+
+                    <button class="danger-btn" onclick="clearAllData()">
+                        Delete All Local Data
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- STUDENT MODAL -->
+
+<div class="modal" id="studentModal">
+
+    <div class="modal-box">
+
+        <button class="modal-close" onclick="closeModal()">×</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
